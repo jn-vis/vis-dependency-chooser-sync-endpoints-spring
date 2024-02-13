@@ -1,4 +1,4 @@
-package com.ccp.vis.web.spring.application;
+package com.ccp.vis;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -20,14 +20,14 @@ import com.ccp.implementations.mensageria.sender.gcp.pubsub.CcpGcpPubSubMensager
 import com.ccp.implementations.mensageria.sender.gcp.pubsub.local.CcpLocalEndpointMensageriaSender;
 import com.ccp.implementations.password.mindrot.CcpMindrotPasswordHandler;
 import com.ccp.vis.controller.VisResumeStep0DadosGeraisController;
-import com.ccp.vis.handler.VisSyncExceptionHandler;
+import com.ccp.web.spring.exceptions.handler.CcpSyncExceptionHandler;
 
 
 @EnableWebMvc
 @EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
 @ComponentScan(basePackageClasses = {
 		VisResumeStep0DadosGeraisController.class, 
-		VisSyncExceptionHandler.class,
+		CcpSyncExceptionHandler.class,
 })
 @SpringBootApplication
 public class VisSyncSpringApplicationStarter {

@@ -1,4 +1,3 @@
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -31,7 +30,8 @@
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
-	</dependencyManagement>	<dependencies>
+	</dependencyManagement>
+	<dependencies>
 		<dependency>
 			<groupId>com.ccp</groupId>
 			<artifactId>ccp-commons</artifactId>
@@ -121,11 +121,11 @@
 			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version><!--$NO-MVN-MAN-VER$ -->
-			<scope>provided</scope>
+			<groupId>com.ccp</groupId>
+			<artifactId>ccp-sync-handler-exception-spring</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+
 		<dependency>
 			<groupId>com.ccp</groupId>
 			<artifactId>ccp-json-gson</artifactId>
