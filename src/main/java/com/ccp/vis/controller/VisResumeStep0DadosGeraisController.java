@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ccp.validation.annotations.ValidationRules;
+import com.ccp.validation.CcpJsonFieldsValidations;
 import com.ccp.vis.sync.validations.resumes.step0.VisResumeStep0DadosGeraisValidations;
 
 @CrossOrigin
@@ -18,14 +18,14 @@ import com.ccp.vis.sync.validations.resumes.step0.VisResumeStep0DadosGeraisValid
 public class VisResumeStep0DadosGeraisController {
 
 	@PostMapping
-	@ValidationRules(rulesClass = VisResumeStep0DadosGeraisValidations.class)
 	public Map<String, String> create(@RequestBody Map<String, Object> body){
+		CcpJsonFieldsValidations.validate(VisResumeStep0DadosGeraisValidations.class, body);
 		return null;
 	}
 
 	@PatchMapping
-	@ValidationRules(rulesClass = VisResumeStep0DadosGeraisValidations.class)
 	public Map<String, String> update(@RequestBody Map<String, Object> body){
+		CcpJsonFieldsValidations.validate(VisResumeStep0DadosGeraisValidations.class, body);
 		return null;
 	}
 	
