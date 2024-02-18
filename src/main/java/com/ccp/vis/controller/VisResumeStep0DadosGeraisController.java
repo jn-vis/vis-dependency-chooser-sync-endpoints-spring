@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ccp.fields.validations.annotations.ValidationRules;
+import com.ccp.validation.annotations.ValidationRules;
 import com.ccp.vis.sync.validations.resumes.step0.VisResumeStep0DadosGeraisValidations;
 
 @CrossOrigin

@@ -37,10 +37,13 @@
 			<artifactId>ccp-commons</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency> 
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+		</dependency>
 		<dependency>
-			<groupId>com.ccp</groupId>
-			<artifactId>ccp-fields-validations-aspectj</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.ccp</groupId>
@@ -124,6 +127,14 @@
 			<groupId>com.ccp</groupId>
 			<artifactId>ccp-sync-handler-exception-spring</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency> 
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
 		</dependency>
 
 		<dependency>
