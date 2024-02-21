@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ccp.validation.CcpJsonFieldsValidations;
-import com.ccp.vis.sync.validations.resumes.step0.VisResumeStep0DadosGeraisValidations;
+import com.ccp.vis.sync.validations.resumes.steps.VisResumeStep0DadosGeraisValidations;
 
 @CrossOrigin
 @RestController
