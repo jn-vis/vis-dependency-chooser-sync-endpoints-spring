@@ -10,22 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ccp.validation.CcpJsonFieldsValidations;
-import com.ccp.vis.sync.validations.VisResumeStep0DadosGeraisValidations;
+import com.ccp.vis.sync.validations.VisPositionStep2FiltrarCandidatosValidations;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/resume/{email}/steps/0")
-public class VisResumeStep0DadosGeraisController {
+@RequestMapping(value = "recruiter/{email}/positions/{title}/steps/2")
+public class VisPositionStep2FiltrarCandidatosController {
 
 	@PostMapping
 	public Map<String, String> create(@RequestBody Map<String, Object> json){
-		CcpJsonFieldsValidations.validate(VisResumeStep0DadosGeraisValidations.class, json);
+		CcpJsonFieldsValidations.validate(VisPositionStep2FiltrarCandidatosValidations.class, json);
 		return null;
 	}
 
 	@PatchMapping
 	public Map<String, String> update(@RequestBody Map<String, Object> json){
-		CcpJsonFieldsValidations.validate(VisResumeStep0DadosGeraisValidations.class, json);
+		CcpJsonFieldsValidations.validate(VisPositionStep2FiltrarCandidatosValidations.class, json);
 		return null;
 	}
 	
