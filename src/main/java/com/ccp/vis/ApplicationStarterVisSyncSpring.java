@@ -19,18 +19,18 @@ import com.ccp.implementations.main.authentication.gcp.oauth.CcpGcpMainAuthentic
 import com.ccp.implementations.mensageria.sender.gcp.pubsub.CcpGcpPubSubMensageriaSender;
 import com.ccp.implementations.mensageria.sender.gcp.pubsub.local.CcpLocalEndpointMensageriaSender;
 import com.ccp.implementations.password.mindrot.CcpMindrotPasswordHandler;
-import com.ccp.vis.controller.VisResumeStep0DadosGeraisController;
+import com.ccp.vis.controller.ControllerVisResume;
 import com.ccp.web.spring.exceptions.handler.CcpSyncExceptionHandler;
 
 
 @EnableWebMvc
 @EnableAutoConfiguration(exclude={MongoAutoConfiguration.class})
 @ComponentScan(basePackageClasses = {
-		VisResumeStep0DadosGeraisController.class, 
+		ControllerVisResume.class, 
 		CcpSyncExceptionHandler.class,
 })
 @SpringBootApplication
-public class VisSyncSpringApplicationStarter {
+public class ApplicationStarterVisSyncSpring {
 	
 	public static void main(String[] args) {
 		boolean localEnviroment = new CcpStringDecorator("c:\\rh").file().exists();
@@ -47,7 +47,7 @@ public class VisSyncSpringApplicationStarter {
 				,new CcpElasticSearchDao()
 		);
 
-		SpringApplication.run(VisSyncSpringApplicationStarter.class, args);
+		SpringApplication.run(ApplicationStarterVisSyncSpring.class, args);
 	}
 
 
