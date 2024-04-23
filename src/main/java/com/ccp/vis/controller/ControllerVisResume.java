@@ -17,7 +17,9 @@ import com.ccp.jn.vis.sync.service.SyncServiceVisResume;
 public class ControllerVisResume {
 
 	private final SyncServiceVisResume service = new SyncServiceVisResume();
-	
+	// Esse projeto e essa classe são o ponto de entrada do front-end, sendo POST para criar novo currículo (Resume) 
+	// 	sendo PATCH para atualizar, para fazer update. Esse projeto contem zero de regra de negócio sendo enrtão facilmente
+	// 	substituível por qualquer outra tecnologia do spring, quando conveniente.
 	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PATCH})
 	public Map<String, Object> create(@PathVariable("email") String email, @RequestBody Map<String, Object> json) {
 		Map<String, Object> save = this.service.save(email, json);
