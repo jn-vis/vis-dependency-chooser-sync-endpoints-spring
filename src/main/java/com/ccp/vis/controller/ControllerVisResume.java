@@ -9,22 +9,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ccp.decorators.CcpJsonRepresentation;
 import com.ccp.jn.vis.sync.service.SyncServiceVisResume;
+import com.ccp.web.spring.utils.CcpSyncSessionValuesExtractor;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/resume/{email}")
-public class ControllerVisResume {
+public class ControllerVisResume  implements CcpSyncSessionValuesExtractor{
 
 	private final SyncServiceVisResume service = new SyncServiceVisResume();
-	// Esse projeto e essa classe são o ponto de entrada do front-end, sendo POST para criar novo currículo (Resume) 
-	// 	sendo PATCH para atualizar, para fazer update. Esse projeto contem zero de regra de negócio sendo enrtão facilmente
-	// 	substituível por qualquer outra tecnologia do spring, quando conveniente.
+
 	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PATCH})
-	public Map<String, Object> create(@PathVariable("email") String email, @RequestBody Map<String, Object> json) {
-		Map<String, Object> save = this.service.save(email, json);
+	public Map<String, Object> save(@PathVariable("email") String email, 
+			@RequestBody Map<String, Object> json, HttpServletRequest request
+			
+			) {
+		CcpJsonRepresentation sessionValues = this.getSessionValues(request, email);
+		CcpJsonRepresentation resume = sessionValues.putAll(json);
+		Map<String, Object> save = this.service.save(resume);
 		return save;
 	}
 
-
+	public Map<String, Object> delete(@PathVariable("email") String email, HttpServletRequest request){
+	
+		CcpJsonRepresentation sessionValues = this.getSessionValues(request, email);
+		
+		Map<String, Object> delete = this.service.delete(sessionValues);
+		return delete;
+	}
 }
