@@ -29,15 +29,34 @@ public class ControllerVisResume  implements CcpSyncSessionValuesExtractor{
 			) {
 		CcpJsonRepresentation sessionValues = this.getSessionValues(request, email);
 		CcpJsonRepresentation resume = sessionValues.putAll(json);
-		Map<String, Object> save = this.service.save(resume);
+		Map<String, Object> save = this.service.save(resume).content;
 		return save;
 	}
 
 	public Map<String, Object> delete(@PathVariable("email") String email, HttpServletRequest request){
-	
+		
 		CcpJsonRepresentation sessionValues = this.getSessionValues(request, email);
 		
-		Map<String, Object> delete = this.service.delete(sessionValues);
+		Map<String, Object> delete = this.service.delete(sessionValues).content;
+	
 		return delete;
+	}
+
+	public Map<String, Object> changeStatus(@PathVariable("email") String email, HttpServletRequest request){
+		
+		CcpJsonRepresentation sessionValues = this.getSessionValues(request, email);
+		
+		Map<String, Object> changeStatus = this.service.changeStatus(sessionValues).content;
+	
+		return changeStatus;
+	}
+
+	public Map<String, Object> getResume(@PathVariable("email") String email, HttpServletRequest request){
+		
+		CcpJsonRepresentation sessionValues = this.getSessionValues(request, email);
+		
+		Map<String, Object> changeStatus = this.service.getResume(sessionValues).content;
+	
+		return changeStatus;
 	}
 }
