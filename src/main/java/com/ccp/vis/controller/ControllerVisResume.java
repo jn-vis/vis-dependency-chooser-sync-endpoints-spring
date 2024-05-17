@@ -31,7 +31,6 @@ public class ControllerVisResume  implements CcpSyncSessionValuesExtractor{
 	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PATCH})
 	public Map<String, Object> save(@PathVariable("email") String email, 
 			@RequestBody Map<String, Object> json, HttpServletRequest request
-			
 			) {
 		CcpJsonRepresentation sessionValues = this.getSessionValues(request, email);
 		CcpJsonRepresentation resume = sessionValues.putAll(json);
@@ -75,7 +74,6 @@ public class ControllerVisResume  implements CcpSyncSessionValuesExtractor{
 		CcpJsonRepresentation sessionValues = this.getSessionValues(request, email);
 		
 		this.loginService.validateSession(sessionValues);
-		
 		String resumeContent = VisCommonsUtils.getResumeContent(email, contentType);
 		
 		CcpJsonRepresentation put = CcpConstants.EMPTY_JSON
