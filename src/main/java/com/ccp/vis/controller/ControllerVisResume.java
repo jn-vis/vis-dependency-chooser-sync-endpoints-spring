@@ -61,7 +61,7 @@ public class ControllerVisResume{
 		return changeStatus;
 	}
 
-	@GetMapping("/type/{contentType}")
+	@GetMapping("/contentType/{contentType}")
 	public Map<String, Object> getResumeFile(
 			@PathVariable("contentType") String contentType, 
 			@RequestBody Map<String, Object> sessionValues){
