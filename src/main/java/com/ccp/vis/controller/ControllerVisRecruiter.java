@@ -18,7 +18,6 @@ import com.ccp.jn.vis.sync.service.SyncServiceVisRecruiter;
 @RequestMapping(value = "recruiter/{email}")
 public class ControllerVisRecruiter {
 
-	private final SyncServiceVisRecruiter service = new SyncServiceVisRecruiter();
 	
 
 	@PostMapping("/resumes/sending/email")
@@ -33,7 +32,7 @@ public class ControllerVisRecruiter {
 				.put("emails", emails)
 				;
 		
-		Map<String, Object> result = this.service.sendResumesToEmail(values).content;
+		Map<String, Object> result = SyncServiceVisRecruiter.INSTANCE.sendResumesToEmail(values).content;
 	
 		return result;
 	}
@@ -46,7 +45,20 @@ public class ControllerVisRecruiter {
 		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues)
 				;
 		
-		Map<String, Object> result = this.service.getAlreadySeenResumes(values).content;
+		Map<String, Object> result = SyncServiceVisRecruiter.INSTANCE.getAlreadySeenResumes(values).content;
+	
+		return result;
+	}
+
+	@GetMapping("/positions")
+	public Map<String, Object> getPositionsFromThisRecruiter(
+			@RequestBody String sessionValues
+			){
+		
+		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues)
+				;
+		
+		Map<String, Object> result = SyncServiceVisRecruiter.INSTANCE.getAlreadySeenResumes(values).content;
 	
 		return result;
 	}

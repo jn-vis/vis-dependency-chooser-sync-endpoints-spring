@@ -110,7 +110,7 @@ public class ControllerVisPosition {
 	}
 	
 	@PostMapping("/words")
-	public Map<String, Object> getImportantWordsFromText(
+	public Map<String, Object> getImportantSkillsFromText(
 			@PathVariable("title") String title,
 			@RequestBody String sessionValues
 			){
@@ -119,13 +119,13 @@ public class ControllerVisPosition {
 				.put("title", title)
 				;
 		
-		Map<String, Object> result = this.service.getImportantWordsFromText(values).content;
+		Map<String, Object> result = this.service.getImportantSkillsFromText(values).content;
 	
 		return result;
 	}
 
 	@PatchMapping("/words")
-	public Map<String, Object> suggestNewWords(
+	public Map<String, Object> suggestNewSkills(
 			@PathVariable("title") String title,
 			@RequestBody String sessionValues
 			){
@@ -134,7 +134,7 @@ public class ControllerVisPosition {
 				.put("title", title)
 				;
 		
-		Map<String, Object> result = this.service.suggestNewWords(values).content;
+		Map<String, Object> result = this.service.suggestNewSkills(values).content;
 	
 		return result;
 	}
