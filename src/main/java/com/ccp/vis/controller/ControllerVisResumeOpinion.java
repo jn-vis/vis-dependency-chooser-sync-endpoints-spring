@@ -25,12 +25,12 @@ public class ControllerVisResumeOpinion {
 			@RequestBody String sessionValues
 			){
 		
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues)
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues)
 				.put("resumeId", resumeId)
 				.put("viewMode", viewMode)
 				;
 		
-		Map<String, Object> result = this.service.getResumeContent(values).content;
+		Map<String, Object> result = this.service.getResumeContent(json).content;
 	
 		return result;
 	}
@@ -41,11 +41,11 @@ public class ControllerVisResumeOpinion {
 			@RequestBody String sessionValues
 			){
 		
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues)
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues)
 				.put("resumeId", resumeId)
 				;
 		
-		Map<String, Object> result = this.service.changeOpinionAboutThisResume(values).content;
+		Map<String, Object> result = this.service.changeOpinionAboutThisResume(json).content;
 	
 		return result;
 	}
@@ -55,11 +55,11 @@ public class ControllerVisResumeOpinion {
 			@RequestBody String sessionValues
 			){
 		
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues)
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues)
 				.put("resumeId", resumeId)
 				;
 		
-		Map<String, Object> result = this.service.saveOpinionAboutThisResume(values).content;
+		Map<String, Object> result = this.service.saveOpinionAboutThisResume(json).content;
 	
 		return result;
 	}

@@ -26,17 +26,17 @@ public class ControllerVisPosition {
 	
 	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PATCH})
 	public Map<String, Object> create(@RequestBody String sessionValues){
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues);
-		Map<String, Object> result = this.service.save(values).content;
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
+		Map<String, Object> result = this.service.save(json).content;
 		return result;
 	}
 	
 	@DeleteMapping("/status")
 	public Map<String, Object> changeStatus(@RequestBody String sessionValues){
 		
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues);
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 		
-		Map<String, Object> result = this.service.changeStatus(values).content;
+		Map<String, Object> result = this.service.changeStatus(json).content;
 	
 		return result;
 	}
@@ -44,9 +44,9 @@ public class ControllerVisPosition {
 	@GetMapping
 	public Map<String, Object> getData(@RequestBody String sessionValues){
 		
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues);
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 		
-		Map<String, Object> result = this.service.getData(values).content;
+		Map<String, Object> result = this.service.getData(json).content;
 	
 		return result;
 	}
@@ -60,13 +60,13 @@ public class ControllerVisPosition {
 			@RequestBody String sessionValues
 			){
 		
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues)
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues)
 				.put("fromIndex", fromIndex)
 				.put("toIndex", toIndex)
 				.put("title", title)
 				;
 		
-		Map<String, Object> result = this.service.getResumeList(values).content;
+		Map<String, Object> result = this.service.getResumeList(json).content;
 	
 		return result;
 	}
@@ -79,13 +79,13 @@ public class ControllerVisPosition {
 			@RequestBody String sessionValues
 			){
 		
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues)
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues)
 				.put("resumeId", resumeId)
 				.put("viewMode", viewMode)
 				.put("title", title)
 				;
 		
-		Map<String, Object> result = this.service.getResumeContent(values).content;
+		Map<String, Object> result = this.service.getResumeContent(json).content;
 	
 		return result;
 	}
@@ -98,13 +98,13 @@ public class ControllerVisPosition {
 			@RequestBody String sessionValues
 			){
 		
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues)
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues)
 				.put("resumeIds", resumeIds)
 				.put("emails", emails)
 				.put("title", title)
 				;
 		
-		Map<String, Object> result = this.service.sendResumesToEmail(values).content;
+		Map<String, Object> result = this.service.sendResumesToEmail(json).content;
 	
 		return result;
 	}
@@ -115,11 +115,11 @@ public class ControllerVisPosition {
 			@RequestBody String sessionValues
 			){
 		
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues)
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues)
 				.put("title", title)
 				;
 		
-		Map<String, Object> result = this.service.getImportantSkillsFromText(values).content;
+		Map<String, Object> result = this.service.getImportantSkillsFromText(json).content;
 	
 		return result;
 	}
@@ -130,11 +130,11 @@ public class ControllerVisPosition {
 			@RequestBody String sessionValues
 			){
 		
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues)
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues)
 				.put("title", title)
 				;
 		
-		Map<String, Object> result = this.service.suggestNewSkills(values).content;
+		Map<String, Object> result = this.service.suggestNewSkills(json).content;
 	
 		return result;
 	}

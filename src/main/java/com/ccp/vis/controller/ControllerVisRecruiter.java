@@ -27,12 +27,12 @@ public class ControllerVisRecruiter {
 			@RequestBody String sessionValues
 			){
 		
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues)
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues)
 				.put("resumeIds", resumeIds)
 				.put("emails", emails)
 				;
 		
-		Map<String, Object> result = SyncServiceVisRecruiter.INSTANCE.sendResumesToEmail(values).content;
+		Map<String, Object> result = SyncServiceVisRecruiter.INSTANCE.sendResumesToEmail(json).content;
 	
 		return result;
 	}
@@ -42,10 +42,10 @@ public class ControllerVisRecruiter {
 			@RequestBody String sessionValues
 			){
 		
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues)
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues)
 				;
 		
-		Map<String, Object> result = SyncServiceVisRecruiter.INSTANCE.getAlreadySeenResumes(values).content;
+		Map<String, Object> result = SyncServiceVisRecruiter.INSTANCE.getAlreadySeenResumes(json).content;
 	
 		return result;
 	}
@@ -55,10 +55,10 @@ public class ControllerVisRecruiter {
 			@RequestBody String sessionValues
 			){
 		
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues)
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues)
 				;
 		
-		Map<String, Object> result = SyncServiceVisRecruiter.INSTANCE.getAlreadySeenResumes(values).content;
+		Map<String, Object> result = SyncServiceVisRecruiter.INSTANCE.getAlreadySeenResumes(json).content;
 	
 		return result;
 	}

@@ -24,9 +24,9 @@ public class ControllerVisResume{
 	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PATCH})
 	public Map<String, Object> save(@RequestBody Map<String, Object> sessionValues) {
 
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues);
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 		
-		Map<String, Object> save = this.service.save(values).content;
+		Map<String, Object> save = this.service.save(json).content;
 		
 		return save;
 	}
@@ -34,9 +34,9 @@ public class ControllerVisResume{
 	@DeleteMapping
 	public Map<String, Object> delete(@RequestBody Map<String, Object> sessionValues){
 		
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues);
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 
-		Map<String, Object> delete = this.service.delete(values).content;
+		Map<String, Object> delete = this.service.delete(json).content;
 	
 		return delete;
 	}
@@ -44,9 +44,9 @@ public class ControllerVisResume{
 	@DeleteMapping("/status")
 	public Map<String, Object> changeStatus(@RequestBody Map<String, Object> sessionValues){
 		
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues);
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 		
-		Map<String, Object> changeStatus = this.service.changeStatus(values).content;
+		Map<String, Object> changeStatus = this.service.changeStatus(json).content;
 	
 		return changeStatus;
 	}
@@ -54,9 +54,9 @@ public class ControllerVisResume{
 	@GetMapping
 	public Map<String, Object> getData(@RequestBody Map<String, Object> sessionValues){
 		
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues);
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 		
-		Map<String, Object> changeStatus = this.service.getData(values).content;
+		Map<String, Object> changeStatus = this.service.getData(json).content;
 	
 		return changeStatus;
 	}
@@ -66,9 +66,9 @@ public class ControllerVisResume{
 			@PathVariable("contentType") String contentType, 
 			@RequestBody Map<String, Object> sessionValues){
 		
-		CcpJsonRepresentation values = new CcpJsonRepresentation(sessionValues).put("contentType", contentType);
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues).put("contentType", contentType);
 		
-		CcpJsonRepresentation put = this.service.getResumeFile(values);
+		CcpJsonRepresentation put = this.service.getResumeFile(json);
 		
 		return put.content;
 	}
