@@ -20,12 +20,10 @@ import com.ccp.jn.vis.sync.service.SyncServiceVisPosition;
 @RequestMapping(value = "recruiters/{email}/positions/{title}")
 public class ControllerVisPosition {
 
-	private final SyncServiceVisPosition service = new SyncServiceVisPosition();
-	
 	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PATCH})
-	public Map<String, Object> create(@RequestBody String sessionValues){
+	public Map<String, Object> save(@RequestBody String sessionValues){
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
-		Map<String, Object> result = this.service.save(json).content;
+		Map<String, Object> result = SyncServiceVisPosition.INSTANCE.save(json).content;
 		return result;
 	}
 	
@@ -34,7 +32,7 @@ public class ControllerVisPosition {
 		
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 		
-		Map<String, Object> result = this.service.changeStatus(json).content;
+		Map<String, Object> result = SyncServiceVisPosition.INSTANCE.changeStatus(json).content;
 	
 		return result;
 	}
@@ -44,31 +42,29 @@ public class ControllerVisPosition {
 		
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 		
-		Map<String, Object> result = this.service.getData(json).content;
+		Map<String, Object> result = SyncServiceVisPosition.INSTANCE.getData(json).content;
 	
 		return result;
 	}
-	
-	
-	@GetMapping("/resumes/fromIndex/{fromIndex}/toIndex/{toIndex}")
+	@GetMapping("/resumes/fromIndex/{fromIndex}/listSize/{listSize}")
 	public Map<String, Object> getResumeList(
 			@PathVariable("fromIndex") String fromIndex,
-			@PathVariable("toIndex") String toIndex,
+			@PathVariable("listSize") String listSize,
 			@PathVariable("title") String title,
 			@RequestBody String sessionValues
 			){
 		
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues)
 				.put("fromIndex", fromIndex)
-				.put("toIndex", toIndex)
+				.put("listSize", listSize)
 				.put("title", title)
 				;
 		
-		Map<String, Object> result = this.service.getResumeList(json).content;
+		Map<String, Object> result = SyncServiceVisPosition.INSTANCE.getResumeList(json).content;
 	
 		return result;
 	}
-
+	//FIXME SALVAR VISUALIZAÇÃO DE CURRICULO
 	@PostMapping("/resumes/{resumeId}/viewMode/{viewMode}")
 	public Map<String, Object> getResumeContent(
 			@PathVariable("resumeId") String resumeId,
@@ -83,7 +79,7 @@ public class ControllerVisPosition {
 				.put("title", title)
 				;
 		
-		Map<String, Object> result = this.service.getResumeContent(json).content;
+		Map<String, Object> result = SyncServiceVisPosition.INSTANCE.getResumeContent(json).content;
 	
 		return result;
 	}
@@ -98,11 +94,11 @@ public class ControllerVisPosition {
 				.put("title", title)
 				;
 		
-		Map<String, Object> result = this.service.getImportantSkillsFromText(json).content;
+		Map<String, Object> result = SyncServiceVisPosition.INSTANCE.getImportantSkillsFromText(json).content;
 	
 		return result;
 	}
-
+	// FIXME suggestNewSkills
 	@PatchMapping("/words")
 	public Map<String, Object> suggestNewSkills(
 			@PathVariable("title") String title,
@@ -113,7 +109,7 @@ public class ControllerVisPosition {
 				.put("title", title)
 				;
 		
-		Map<String, Object> result = this.service.suggestNewSkills(json).content;
+		Map<String, Object> result = SyncServiceVisPosition.INSTANCE.suggestNewSkills(json).content;
 	
 		return result;
 	}

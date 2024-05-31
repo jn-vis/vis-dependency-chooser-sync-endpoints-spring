@@ -19,14 +19,12 @@ import com.ccp.jn.vis.sync.service.SyncServiceVisResume;
 @RequestMapping(value = "/resume/{email}")
 public class ControllerVisResume{
 	
-	private final SyncServiceVisResume service = new SyncServiceVisResume();
-
 	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PATCH})
 	public Map<String, Object> save(@RequestBody Map<String, Object> sessionValues) {
 
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 		
-		Map<String, Object> save = this.service.save(json).content;
+		Map<String, Object> save = SyncServiceVisResume.INSTANCE.save(json).content;
 		
 		return save;
 	}
@@ -36,7 +34,7 @@ public class ControllerVisResume{
 		
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 
-		Map<String, Object> delete = this.service.delete(json).content;
+		Map<String, Object> delete = SyncServiceVisResume.INSTANCE.delete(json).content;
 	
 		return delete;
 	}
@@ -46,7 +44,7 @@ public class ControllerVisResume{
 		
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 		
-		Map<String, Object> changeStatus = this.service.changeStatus(json).content;
+		Map<String, Object> changeStatus = SyncServiceVisResume.INSTANCE.changeStatus(json).content;
 	
 		return changeStatus;
 	}
@@ -56,19 +54,19 @@ public class ControllerVisResume{
 		
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 		
-		Map<String, Object> changeStatus = this.service.getData(json).content;
+		Map<String, Object> changeStatus = SyncServiceVisResume.INSTANCE.getData(json).content;
 	
 		return changeStatus;
 	}
 
-	@GetMapping("/contentType/{contentType}")
+	@GetMapping("/viewMode/{viewMode}")
 	public Map<String, Object> getResumeFile(
-			@PathVariable("contentType") String contentType, 
+			@PathVariable("viewMode") String viewMode, 
 			@RequestBody Map<String, Object> sessionValues){
 		
-		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues).put("contentType", contentType);
+		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues).put("viewMode", viewMode);
 		
-		CcpJsonRepresentation put = this.service.getResumeFile(json);
+		CcpJsonRepresentation put = SyncServiceVisResume.INSTANCE.getResumeFile(json);
 		
 		return put.content;
 	}
