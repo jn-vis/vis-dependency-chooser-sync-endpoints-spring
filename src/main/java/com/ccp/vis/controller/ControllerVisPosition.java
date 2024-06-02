@@ -64,7 +64,7 @@ public class ControllerVisPosition {
 	
 		return result;
 	}
-	//FIXME SALVAR VISUALIZAÇÃO DE CURRICULO
+
 	@PostMapping("/resumes/{resumeId}/viewMode/{viewMode}")
 	public Map<String, Object> getResumeContent(
 			@PathVariable("resumeId") String resumeId,
@@ -98,7 +98,7 @@ public class ControllerVisPosition {
 	
 		return result;
 	}
-	// FIXME suggestNewSkills
+	// TODO suggestNewSkills
 	@PatchMapping("/words")
 	public Map<String, Object> suggestNewSkills(
 			@PathVariable("title") String title,
