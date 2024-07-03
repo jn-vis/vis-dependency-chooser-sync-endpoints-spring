@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.ccp.decorators.CcpStringDecorator;
 import com.ccp.dependency.injection.CcpDependencyInjection;
+import com.ccp.dependency.injection.CcpInstanceProvider;
 import com.ccp.implementations.cache.gcp.memcache.CcpGcpMemCache;
 import com.ccp.implementations.db.crud.elasticsearch.CcpElasticSearchCrud;
 import com.ccp.implementations.db.utils.elasticsearch.CcpElasticSearchDbRequest;
@@ -17,8 +18,9 @@ import com.ccp.implementations.http.apache.mime.CcpApacheMimeHttp;
 import com.ccp.implementations.json.gson.CcpGsonJsonHandler;
 import com.ccp.implementations.main.authentication.gcp.oauth.CcpGcpMainAuthentication;
 import com.ccp.implementations.mensageria.sender.gcp.pubsub.CcpGcpPubSubMensageriaSender;
-import com.ccp.implementations.mensageria.sender.gcp.pubsub.local.CcpLocalEndpointMensageriaSender;
 import com.ccp.implementations.password.mindrot.CcpMindrotPasswordHandler;
+import com.ccp.jn.async.business.factory.CcpJnAsyncBusinessFactory;
+import com.ccp.local.testings.implementations.CcpLocalInstances;
 import com.ccp.vis.controller.ControllerVisResume;
 import com.ccp.web.spring.exceptions.handler.CcpSyncExceptionHandler;
 
@@ -34,9 +36,11 @@ public class ApplicationStarterVisSyncSpring {
 	
 	public static void main(String[] args) {
 		boolean localEnviroment = new CcpStringDecorator("c:\\rh").file().exists();
+		CcpInstanceProvider<?> businessInstanceProvider = new CcpJnAsyncBusinessFactory();
 		CcpDependencyInjection.loadAllDependencies
 		(
-				localEnviroment ? new CcpLocalEndpointMensageriaSender() : new CcpGcpPubSubMensageriaSender()
+				localEnviroment ? CcpLocalInstances.cache.getLocalImplementation(businessInstanceProvider) : new CcpGcpMemCache(),
+				localEnviroment ? CcpLocalInstances.mensageriaSender.getLocalImplementation(businessInstanceProvider) : new CcpGcpPubSubMensageriaSender()
 				,new CcpGcpMainAuthentication()
 				,new CcpGsonJsonHandler()
 				,new CcpGcpFileBucket()
