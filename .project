@@ -15,7 +15,6 @@
 		<project>ccp-json-gson</project>
 		<project>vis-business-commons</project>
 		<project>ccp-db-bulk-elasticsearch</project>
-		<project>ccp-commons</project>
 		<project>ccp-db-query-elasticsearch</project>
 		<project>ccp-instant-messenger-telegram</project>
 		<project>ccp-db-utils-elasticsearch</project>
