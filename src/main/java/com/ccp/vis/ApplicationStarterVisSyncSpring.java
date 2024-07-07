@@ -39,16 +39,15 @@ public class ApplicationStarterVisSyncSpring {
 		CcpInstanceProvider<?> businessInstanceProvider = new CcpJnAsyncBusinessFactory();
 		CcpDependencyInjection.loadAllDependencies
 		(
+				localEnviroment ? CcpLocalInstances.mensageriaSender.getLocalImplementation(businessInstanceProvider) : new CcpGcpPubSubMensageriaSender(),
 				localEnviroment ? CcpLocalInstances.cache.getLocalImplementation(businessInstanceProvider) : new CcpGcpMemCache(),
-				localEnviroment ? CcpLocalInstances.mensageriaSender.getLocalImplementation(businessInstanceProvider) : new CcpGcpPubSubMensageriaSender()
+				localEnviroment ? CcpLocalInstances.bucket.getLocalImplementation(businessInstanceProvider) : new CcpGcpFileBucket(),
+				new CcpElasticSearchDbRequest(),
+				new CcpMindrotPasswordHandler()
 				,new CcpGcpMainAuthentication()
-				,new CcpGsonJsonHandler()
-				,new CcpGcpFileBucket()
-				,new CcpMindrotPasswordHandler()
-				,new CcpElasticSearchDbRequest()
-				,new CcpGcpMemCache()
-				,new CcpApacheMimeHttp() 
 				,new CcpElasticSearchCrud()
+				,new CcpGsonJsonHandler()
+				,new CcpApacheMimeHttp() 
 		);
 
 		SpringApplication.run(ApplicationStarterVisSyncSpring.class, args);
