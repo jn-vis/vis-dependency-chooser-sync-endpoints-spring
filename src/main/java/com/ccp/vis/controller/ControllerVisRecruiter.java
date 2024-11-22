@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ccp.decorators.CcpJsonRepresentation;
-import com.ccp.jn.vis.sync.service.SyncServiceVisRecruiter;
+import com.ccp.jn.sync.mensageria.JnSyncMensageriaSender;
+import com.jn.vis.commons.utils.VisAsyncBusiness;
+import com.vis.commons.entities.VisEntityGroupPositionsByRecruiter;
+import com.vis.commons.entities.VisEntityGroupResumesPerceptionsByRecruiter;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "recruiter/{email}")
@@ -33,9 +36,9 @@ public class ControllerVisRecruiter {
 				.put("emails", emails)
 				;
 		
-		Map<String, Object> result = SyncServiceVisRecruiter.INSTANCE.sendResumesToEmail(json).content;
+		CcpJsonRepresentation result = JnSyncMensageriaSender.INSTANCE.whenSendMessage(VisAsyncBusiness.recruiterReceivingResumes).apply(json);
 	
-		return result;
+		return result.content;
 	}
 
 	@GetMapping("/resumes/seen/{opinionType}")
@@ -48,11 +51,12 @@ public class ControllerVisRecruiter {
 				.put("opinionType", opinionType)
 				;
 		
-		Map<String, Object> result = SyncServiceVisRecruiter.INSTANCE.getAlreadySeenResumes(json).content;
+		CcpJsonRepresentation result = VisEntityGroupResumesPerceptionsByRecruiter.INSTANCE.getData(json);
 	
-		return result;
+		return result.content;
 	}
 
+	//FIXME CACHE LOCAL NO COMPUTE ENGINE
 	@GetMapping("/positions/{positionStatus}")
 	public Map<String, Object> getPositionsFromThisRecruiter(
 			@PathVariable("positionStatus") String positionStatus
@@ -63,9 +67,9 @@ public class ControllerVisRecruiter {
 				.put("positionStatus", positionStatus)
 				;
 		
-		Map<String, Object> result = SyncServiceVisRecruiter.INSTANCE.getPositionsFromThisRecruiter(json).content;
+		CcpJsonRepresentation result = VisEntityGroupPositionsByRecruiter.INSTANCE.getData(json);
 	
-		return result;
+		return result.content;
 	}
 	
 	@PostMapping("/resumes/{resumeId}")
@@ -78,9 +82,9 @@ public class ControllerVisRecruiter {
 				.put("resumeId", resumeId)
 				;
 		
-		Map<String, Object> result = SyncServiceVisRecruiter.INSTANCE.changeOpinionAboutThisResume(json).content;
+		CcpJsonRepresentation result = JnSyncMensageriaSender.INSTANCE.whenSendMessage(VisAsyncBusiness.resumeOpinionChange).apply(json);
 	
-		return result;
+		return result.content;
 	}
 	@PostMapping("/resumes/{resumeId}")
 	public Map<String, Object> saveOpinionAboutThisResume(
@@ -92,9 +96,9 @@ public class ControllerVisRecruiter {
 				.put("resumeId", resumeId)
 				;
 		
-		Map<String, Object> result = SyncServiceVisRecruiter.INSTANCE.saveOpinionAboutThisResume(json).content;
+		CcpJsonRepresentation result = JnSyncMensageriaSender.INSTANCE.whenSendMessage(VisAsyncBusiness.resumeOpinionSave).apply(json);
 	
-		return result;
+		return result.content;
 	}
 
 }

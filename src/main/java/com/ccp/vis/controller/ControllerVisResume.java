@@ -1,6 +1,7 @@
 package com.ccp.vis.controller;
 
 import java.util.Map;
+import java.util.function.Function;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ccp.decorators.CcpJsonRepresentation;
-import com.ccp.jn.vis.sync.service.SyncServiceVisResume;
+import com.ccp.jn.sync.mensageria.JnSyncMensageriaSender;
+import com.jn.vis.commons.utils.VisAsyncBusiness;
+import com.jn.vis.commons.utils.VisCommonsUtils;
+import com.vis.commons.entities.VisEntityResume;
 
 @CrossOrigin
 @RestController
@@ -24,9 +28,12 @@ public class ControllerVisResume{
 
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 		
-		Map<String, Object> save = SyncServiceVisResume.INSTANCE.save(json).content;
-		
-		return save;
+		Function<CcpJsonRepresentation, CcpJsonRepresentation> resumeBucketSave =
+				JnSyncMensageriaSender.INSTANCE.whenSendMessage(VisAsyncBusiness.resume);
+
+		CcpJsonRepresentation sendResultFromSaveResumeFile = resumeBucketSave.apply(json);
+
+		return  sendResultFromSaveResumeFile.content;
 	}
 
 	@DeleteMapping
@@ -34,9 +41,10 @@ public class ControllerVisResume{
 		
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 
-		Map<String, Object> delete = SyncServiceVisResume.INSTANCE.delete(json).content;
-	
-		return delete;
+		CcpJsonRepresentation result = JnSyncMensageriaSender
+				.INSTANCE.whenSendMessage(VisAsyncBusiness.resumeDelete).apply(json);
+
+		return result.content;
 	}
 
 	@DeleteMapping("/status")
@@ -44,9 +52,9 @@ public class ControllerVisResume{
 		
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 		
-		Map<String, Object> changeStatus = SyncServiceVisResume.INSTANCE.changeStatus(json).content;
-	
-		return changeStatus;
+		CcpJsonRepresentation result = JnSyncMensageriaSender.INSTANCE.whenSendMessage(VisAsyncBusiness.resumeStatusChange).apply(json);
+
+		return result.content;
 	}
 
 	@GetMapping
@@ -54,21 +62,22 @@ public class ControllerVisResume{
 		
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 		
-		Map<String, Object> changeStatus = SyncServiceVisResume.INSTANCE.getData(json).content;
+		Map<String, Object> changeStatus = VisEntityResume.INSTANCE.getData(json).content;
 	
 		return changeStatus;
 	}
 
 	@GetMapping("/viewMode/{viewMode}")
-	public Map<String, Object> getResumeFile(
+	public Map<String, Object> getFile(
 			@PathVariable("viewMode") String viewMode, 
 			@RequestBody Map<String, Object> sessionValues){
 		
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues).put("viewMode", viewMode);
 		
-		CcpJsonRepresentation put = SyncServiceVisResume.INSTANCE.getResumeFile(json);
+		CcpJsonRepresentation resume = VisCommonsUtils.getResumeFromBucket(json);
+
+		return resume.content;
 		
-		return put.content;
 	}
 
 }
