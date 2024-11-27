@@ -1,7 +1,6 @@
 package com.ccp.vis.controller;
 
 import java.util.Map;
-import java.util.function.Function;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,35 +25,29 @@ public class ControllerVisResume{
 	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PATCH})
 	public Map<String, Object> save(@RequestBody Map<String, Object> sessionValues) {
 
-		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
-		
-		Function<CcpJsonRepresentation, CcpJsonRepresentation> resumeBucketSave =
-				JnSyncMensageriaSender.INSTANCE.whenSendMessage(VisAsyncBusiness.resume);
+		Map<String, Object> result =
+				JnSyncMensageriaSender.INSTANCE.sendJsonToTopic(VisAsyncBusiness.resume, sessionValues);
 
-		CcpJsonRepresentation sendResultFromSaveResumeFile = resumeBucketSave.apply(json);
-
-		return  sendResultFromSaveResumeFile.content;
+		return  result;
 	}
 
+	
+	
 	@DeleteMapping
 	public Map<String, Object> delete(@RequestBody Map<String, Object> sessionValues){
 		
-		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
+		Map<String, Object> result =
+				JnSyncMensageriaSender.INSTANCE.sendJsonToTopic(VisAsyncBusiness.resumeDelete, sessionValues);
 
-		CcpJsonRepresentation result = JnSyncMensageriaSender
-				.INSTANCE.whenSendMessage(VisAsyncBusiness.resumeDelete).apply(json);
-
-		return result.content;
+		return  result;
 	}
 
 	@DeleteMapping("/status")
 	public Map<String, Object> changeStatus(@RequestBody Map<String, Object> sessionValues){
 		
-		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
-		
-		CcpJsonRepresentation result = JnSyncMensageriaSender.INSTANCE.whenSendMessage(VisAsyncBusiness.resumeStatusChange).apply(json);
+		Map<String, Object> result = JnSyncMensageriaSender.INSTANCE.sendJsonToTopic(VisAsyncBusiness.resumeStatusChange, sessionValues);
 
-		return result.content;
+		return  result;
 	}
 
 	@GetMapping
