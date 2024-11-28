@@ -36,7 +36,7 @@ public class ControllerVisRecruiter {
 				.put("emails", emails)
 				;
 		
-		CcpJsonRepresentation result = JnSyncMensageriaSender.INSTANCE.sendJsonToTopic(VisAsyncBusiness.recruiterReceivingResumes, json);
+		CcpJsonRepresentation result = new JnSyncMensageriaSender(VisAsyncBusiness.recruiterReceivingResumes).apply(json);
 	
 		return result.content;
 	}
@@ -82,7 +82,7 @@ public class ControllerVisRecruiter {
 				.put("resumeId", resumeId)
 				;
 		
-		CcpJsonRepresentation result = JnSyncMensageriaSender.INSTANCE.sendJsonToTopic(VisAsyncBusiness.resumeOpinionChange, json);
+		CcpJsonRepresentation result = new JnSyncMensageriaSender(VisAsyncBusiness.resumeOpinionChange).apply(json);
 	
 		return result.content;
 	}
@@ -96,7 +96,7 @@ public class ControllerVisRecruiter {
 				.put("resumeId", resumeId)
 				;
 		
-		CcpJsonRepresentation result = JnSyncMensageriaSender.INSTANCE.sendJsonToTopic(VisAsyncBusiness.resumeOpinionSave, json);
+		CcpJsonRepresentation result = new JnSyncMensageriaSender(VisAsyncBusiness.resumeOpinionSave).apply(json);
 	
 		return result.content;
 	}

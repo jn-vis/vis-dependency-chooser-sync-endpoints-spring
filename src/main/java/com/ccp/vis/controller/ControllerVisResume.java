@@ -25,19 +25,15 @@ public class ControllerVisResume{
 	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PATCH})
 	public Map<String, Object> save(@RequestBody Map<String, Object> sessionValues) {
 
-		Map<String, Object> result =
-				JnSyncMensageriaSender.INSTANCE.sendJsonToTopic(VisAsyncBusiness.resume, sessionValues);
+		Map<String, Object> result = new JnSyncMensageriaSender(VisAsyncBusiness.resume).apply(sessionValues);
 
 		return  result;
 	}
-
-	
 	
 	@DeleteMapping
 	public Map<String, Object> delete(@RequestBody Map<String, Object> sessionValues){
 		
-		Map<String, Object> result =
-				JnSyncMensageriaSender.INSTANCE.sendJsonToTopic(VisAsyncBusiness.resumeDelete, sessionValues);
+		Map<String, Object> result = new JnSyncMensageriaSender(VisAsyncBusiness.resumeDelete).apply(sessionValues);
 
 		return  result;
 	}
@@ -45,7 +41,7 @@ public class ControllerVisResume{
 	@DeleteMapping("/status")
 	public Map<String, Object> changeStatus(@RequestBody Map<String, Object> sessionValues){
 		
-		Map<String, Object> result = JnSyncMensageriaSender.INSTANCE.sendJsonToTopic(VisAsyncBusiness.resumeStatusChange, sessionValues);
+		Map<String, Object> result = new JnSyncMensageriaSender(VisAsyncBusiness.resumeStatusChange).apply(sessionValues);
 
 		return  result;
 	}
