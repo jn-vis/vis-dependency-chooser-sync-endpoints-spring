@@ -51,7 +51,7 @@ public class ControllerVisRecruiter {
 				.put("opinionType", opinionType)
 				;
 		
-		CcpJsonRepresentation result = VisEntityGroupResumesPerceptionsByRecruiter.INSTANCE.getData(json);
+		CcpJsonRepresentation result = VisEntityGroupResumesPerceptionsByRecruiter.ENTITY.getData(json);
 	
 		return result.content;
 	}
@@ -67,7 +67,7 @@ public class ControllerVisRecruiter {
 				.put("positionStatus", positionStatus)
 				;
 		
-		CcpJsonRepresentation result = VisEntityGroupPositionsByRecruiter.INSTANCE.getData(json);
+		CcpJsonRepresentation result = VisEntityGroupPositionsByRecruiter.ENTITY.getData(json);
 	
 		return result.content;
 	}

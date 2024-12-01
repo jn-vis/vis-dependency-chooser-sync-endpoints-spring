@@ -51,7 +51,7 @@ public class ControllerVisResume{
 		
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 		
-		Map<String, Object> changeStatus = VisEntityResume.INSTANCE.getData(json).content;
+		Map<String, Object> changeStatus = VisEntityResume.ENTITY.getData(json).content;
 	
 		return changeStatus;
 	}
