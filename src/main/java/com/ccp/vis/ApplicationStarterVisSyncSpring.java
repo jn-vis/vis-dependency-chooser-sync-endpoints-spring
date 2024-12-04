@@ -21,6 +21,7 @@ import com.ccp.implementations.mensageria.sender.gcp.pubsub.CcpGcpPubSubMensager
 import com.ccp.implementations.password.mindrot.CcpMindrotPasswordHandler;
 import com.ccp.jn.async.business.factory.CcpJnAsyncBusinessFactory;
 import com.ccp.local.testings.implementations.CcpLocalInstances;
+import com.ccp.local.testings.implementations.cache.CcpLocalCacheInstances;
 import com.ccp.vis.controller.ControllerVisResume;
 import com.ccp.web.spring.exceptions.handler.CcpSyncExceptionHandler;
 
@@ -40,7 +41,7 @@ public class ApplicationStarterVisSyncSpring {
 		CcpDependencyInjection.loadAllDependencies
 		(
 				localEnviroment ? CcpLocalInstances.mensageriaSender.getLocalImplementation(businessInstanceProvider) : new CcpGcpPubSubMensageriaSender(),
-				localEnviroment ? CcpLocalInstances.cache.getLocalImplementation(businessInstanceProvider) : new CcpGcpMemCache(),
+				localEnviroment ? CcpLocalCacheInstances.map.getLocalImplementation(businessInstanceProvider) : new CcpGcpMemCache(),
 				localEnviroment ? CcpLocalInstances.bucket.getLocalImplementation(businessInstanceProvider) : new CcpGcpFileBucket(),
 				new CcpElasticSearchDbRequest(),
 				new CcpMindrotPasswordHandler()
