@@ -98,7 +98,7 @@ public class ControllerVisPosition {
 	
 		return result;
 	}
-	// TODO suggestNewSkills
+	// LATER suggestNewSkills
 	@PatchMapping("/words")
 	public Map<String, Object> suggestNewSkills(
 			@PathVariable("title") String title,
