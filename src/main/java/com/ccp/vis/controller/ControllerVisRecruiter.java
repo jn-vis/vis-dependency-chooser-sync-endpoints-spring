@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ccp.decorators.CcpJsonRepresentation;
 import com.ccp.jn.sync.mensageria.JnSyncMensageriaSender;
+
 import com.jn.vis.commons.utils.VisAsyncBusiness;
 import com.vis.commons.entities.VisEntityGroupPositionsByRecruiter;
 import com.vis.commons.entities.VisEntityGroupResumesPerceptionsByRecruiter;
