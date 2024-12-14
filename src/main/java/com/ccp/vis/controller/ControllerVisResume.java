@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ccp.decorators.CcpJsonRepresentation;
 import com.ccp.jn.sync.mensageria.JnSyncMensageriaSender;
-
+import com.jn.commons.utils.JnDeleteKeysFromCache;
 import com.jn.vis.commons.utils.VisAsyncBusiness;
 import com.jn.vis.commons.utils.VisCommonsUtils;
 import com.vis.commons.entities.VisEntityResume;
@@ -52,7 +52,7 @@ public class ControllerVisResume{
 		
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 		
-		Map<String, Object> changeStatus = VisEntityResume.ENTITY.getData(json).content;
+		Map<String, Object> changeStatus = VisEntityResume.ENTITY.getData(json, JnDeleteKeysFromCache.INSTANCE).content;
 	
 		return changeStatus;
 	}

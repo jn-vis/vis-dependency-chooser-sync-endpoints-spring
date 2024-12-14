@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ccp.decorators.CcpJsonRepresentation;
 import com.ccp.jn.sync.mensageria.JnSyncMensageriaSender;
-
+import com.jn.commons.utils.JnDeleteKeysFromCache;
 import com.jn.vis.commons.utils.VisAsyncBusiness;
 import com.vis.commons.entities.VisEntityGroupPositionsByRecruiter;
 import com.vis.commons.entities.VisEntityGroupResumesPerceptionsByRecruiter;
@@ -52,7 +52,7 @@ public class ControllerVisRecruiter {
 				.put("opinionType", opinionType)
 				;
 		
-		CcpJsonRepresentation result = VisEntityGroupResumesPerceptionsByRecruiter.ENTITY.getData(json);
+		CcpJsonRepresentation result = VisEntityGroupResumesPerceptionsByRecruiter.ENTITY.getData(json, JnDeleteKeysFromCache.INSTANCE);
 	
 		return result.content;
 	}
@@ -68,7 +68,7 @@ public class ControllerVisRecruiter {
 				.put("positionStatus", positionStatus)
 				;
 		
-		CcpJsonRepresentation result = VisEntityGroupPositionsByRecruiter.ENTITY.getData(json);
+		CcpJsonRepresentation result = VisEntityGroupPositionsByRecruiter.ENTITY.getData(json, JnDeleteKeysFromCache.INSTANCE);
 	
 		return result.content;
 	}
