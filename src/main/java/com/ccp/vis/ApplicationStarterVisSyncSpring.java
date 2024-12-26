@@ -9,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.ccp.decorators.CcpStringDecorator;
 import com.ccp.dependency.injection.CcpDependencyInjection;
-import com.ccp.dependency.injection.CcpInstanceProvider;
 import com.ccp.implementations.cache.gcp.memcache.CcpGcpMemCache;
 import com.ccp.implementations.db.crud.elasticsearch.CcpElasticSearchCrud;
 import com.ccp.implementations.db.utils.elasticsearch.CcpElasticSearchDbRequest;
@@ -19,11 +18,14 @@ import com.ccp.implementations.json.gson.CcpGsonJsonHandler;
 import com.ccp.implementations.main.authentication.gcp.oauth.CcpGcpMainAuthentication;
 import com.ccp.implementations.mensageria.sender.gcp.pubsub.CcpGcpPubSubMensageriaSender;
 import com.ccp.implementations.password.mindrot.CcpMindrotPasswordHandler;
-import com.ccp.jn.async.business.factory.CcpJnAsyncBusinessFactory;
+import com.ccp.implementations.text.extractor.apache.tika.CcpApacheTikaTextExtractor;
+import com.ccp.jn.sync.mensageria.JnSyncMensageriaSender;
 import com.ccp.local.testings.implementations.CcpLocalInstances;
 import com.ccp.local.testings.implementations.cache.CcpLocalCacheInstances;
+import com.ccp.vis.async.business.factory.CcpVisAsyncBusinessFactory;
 import com.ccp.vis.controller.ControllerVisResume;
 import com.ccp.web.spring.exceptions.handler.CcpSyncExceptionHandler;
+import com.jn.commons.utils.JnAsyncBusiness;
 
 
 @EnableWebMvc
@@ -37,12 +39,13 @@ public class ApplicationStarterVisSyncSpring {
 	
 	public static void main(String[] args) {
 		boolean localEnviroment = new CcpStringDecorator("c:\\rh").file().exists();
-		CcpInstanceProvider<?> businessInstanceProvider = new CcpJnAsyncBusinessFactory();
+		CcpVisAsyncBusinessFactory asyncBusiness = new CcpVisAsyncBusinessFactory();
 		CcpDependencyInjection.loadAllDependencies
 		(
-				localEnviroment ? CcpLocalInstances.mensageriaSender.getLocalImplementation(businessInstanceProvider) : new CcpGcpPubSubMensageriaSender(),
-				localEnviroment ? CcpLocalCacheInstances.map.getLocalImplementation(businessInstanceProvider) : new CcpGcpMemCache(),
-				localEnviroment ? CcpLocalInstances.bucket.getLocalImplementation(businessInstanceProvider) : new CcpGcpFileBucket(),
+				localEnviroment ? CcpLocalInstances.mensageriaSender.getLocalImplementation(asyncBusiness) : new CcpGcpPubSubMensageriaSender(),
+				localEnviroment ? CcpLocalCacheInstances.map.getLocalImplementation(asyncBusiness) : new CcpGcpMemCache(),
+				localEnviroment ? CcpLocalInstances.bucket.getLocalImplementation(asyncBusiness) : new CcpGcpFileBucket(),
+				new CcpApacheTikaTextExtractor(),
 				new CcpElasticSearchDbRequest(),
 				new CcpMindrotPasswordHandler()
 				,new CcpGcpMainAuthentication()
@@ -51,6 +54,7 @@ public class ApplicationStarterVisSyncSpring {
 				,new CcpApacheMimeHttp() 
 		);
 
+		CcpSyncExceptionHandler.genericExceptionHandler = new JnSyncMensageriaSender(JnAsyncBusiness.notifyError);
 		SpringApplication.run(ApplicationStarterVisSyncSpring.class, args);
 	}
 

@@ -87,7 +87,7 @@ public class ControllerVisRecruiter {
 	
 		return result.content;
 	}
-	@PostMapping("/resumes/{resumeId}")
+	@PostMapping("/resumes/{resumeId}/opinion")
 	public Map<String, Object> saveOpinionAboutThisResume(
 			@PathVariable("resumeId") String resumeId,
 			@RequestBody String sessionValues

@@ -70,4 +70,8 @@ public class ControllerVisResume{
 		
 	}
 
+	@GetMapping("/oi")
+	public String oi() {
+		return "oi";
+	}
 }
