@@ -23,7 +23,7 @@ import com.vis.commons.entities.VisEntityResume;
 @RequestMapping(value = "/resume/{email}")
 public class ControllerVisResume{
 	
-	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PATCH})
+	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PATCH}, path = "/language/{language}")
 	public Map<String, Object> save(@RequestBody Map<String, Object> sessionValues) {
 
 		Map<String, Object> result = new JnSyncMensageriaSender(VisAsyncBusiness.resume).apply(sessionValues);
@@ -31,7 +31,7 @@ public class ControllerVisResume{
 		return  result;
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("/language/{language}")
 	public Map<String, Object> delete(@RequestBody Map<String, Object> sessionValues){
 		
 		Map<String, Object> result = new JnSyncMensageriaSender(VisAsyncBusiness.resumeDelete).apply(sessionValues);

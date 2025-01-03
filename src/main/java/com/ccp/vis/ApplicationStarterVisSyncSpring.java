@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -24,8 +26,11 @@ import com.ccp.local.testings.implementations.CcpLocalInstances;
 import com.ccp.local.testings.implementations.cache.CcpLocalCacheInstances;
 import com.ccp.vis.async.business.factory.CcpVisAsyncBusinessFactory;
 import com.ccp.vis.controller.ControllerVisResume;
+import com.ccp.web.servlet.filters.CcpPutSessionValuesAndExecuteTaskFilter;
+import com.ccp.web.servlet.filters.CcpValidEmailFilter;
 import com.ccp.web.spring.exceptions.handler.CcpSyncExceptionHandler;
 import com.jn.commons.utils.JnAsyncBusiness;
+import com.jn.commons.utils.JnValidateSession;
 
 
 @EnableWebMvc
@@ -56,6 +61,31 @@ public class ApplicationStarterVisSyncSpring {
 
 		CcpSyncExceptionHandler.genericExceptionHandler = new JnSyncMensageriaSender(JnAsyncBusiness.notifyError);
 		SpringApplication.run(ApplicationStarterVisSyncSpring.class, args);
+	}
+	@Bean
+	public FilterRegistrationBean<CcpValidEmailFilter> emailFilter() {
+		FilterRegistrationBean<CcpValidEmailFilter> filtro = new FilterRegistrationBean<>();
+		CcpValidEmailFilter emailSyntaxFilter = CcpValidEmailFilter.getEmailSyntaxFilter("resume/");
+		filtro.setFilter(emailSyntaxFilter);
+		filtro.addUrlPatterns("/resume/*", "/position/*");
+		return filtro;
+	}
+
+	@Bean
+	public FilterRegistrationBean<CcpPutSessionValuesAndExecuteTaskFilter> putSessionValuesFilter() {
+		FilterRegistrationBean<CcpPutSessionValuesAndExecuteTaskFilter> filtro = new FilterRegistrationBean<>();
+		filtro.setFilter(CcpPutSessionValuesAndExecuteTaskFilter.TASKLESS);
+		filtro.addUrlPatterns("/resume/*", "/position/*");
+		return filtro;
+	}
+
+	@Bean
+	public FilterRegistrationBean<CcpPutSessionValuesAndExecuteTaskFilter> validateSessionFilter() {
+		FilterRegistrationBean<CcpPutSessionValuesAndExecuteTaskFilter> filtro = new FilterRegistrationBean<>();
+		CcpPutSessionValuesAndExecuteTaskFilter filter = new CcpPutSessionValuesAndExecuteTaskFilter(JnValidateSession.INSTANCE);
+		filtro.setFilter(filter);
+		filtro.addUrlPatterns("/resume/*", "/position/*");
+		return filtro;
 	}
 
 
