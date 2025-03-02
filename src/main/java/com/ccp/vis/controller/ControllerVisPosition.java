@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ccp.decorators.CcpJsonRepresentation;
 import com.ccp.jn.vis.sync.service.SyncServiceVisPosition;
+import com.vis.commons.entities.VisEntityGroupResumesByPosition;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "recruiters/{email}/positions/{title}")
@@ -55,9 +56,9 @@ public class ControllerVisPosition {
 			){
 		
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues)
-				.put("fromIndex", fromIndex)
-				.put("listSize", listSize)
-				.put("title", title)
+				.put(VisEntityGroupResumesByPosition.Fields.from.name(), fromIndex)
+				.put(VisEntityGroupResumesByPosition.Fields.listSize.name(), listSize)
+				.put(VisEntityGroupResumesByPosition.Fields.title.name(), title)
 				;
 		
 		Map<String, Object> result = SyncServiceVisPosition.INSTANCE.getResumeList(json).content;
