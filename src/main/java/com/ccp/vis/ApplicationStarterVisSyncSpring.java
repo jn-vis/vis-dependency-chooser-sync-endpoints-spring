@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.ccp.decorators.CcpStringDecorator;
 import com.ccp.dependency.injection.CcpDependencyInjection;
+import com.ccp.http.CcpHttpMethods;
 import com.ccp.implementations.cache.gcp.memcache.CcpGcpMemCache;
 import com.ccp.implementations.db.crud.elasticsearch.CcpElasticSearchCrud;
 import com.ccp.implementations.db.utils.elasticsearch.CcpElasticSearchDbRequest;
@@ -28,9 +29,11 @@ import com.ccp.vis.async.business.factory.CcpVisAsyncBusinessFactory;
 import com.ccp.vis.controller.ControllerVisResume;
 import com.ccp.web.servlet.filters.CcpPutSessionValuesAndExecuteTaskFilter;
 import com.ccp.web.servlet.filters.CcpValidEmailFilter;
+import com.ccp.web.servlet.filters.CcpValidJsonFilter;
 import com.ccp.web.spring.exceptions.handler.CcpSyncExceptionHandler;
 import com.jn.commons.utils.JnAsyncBusiness;
 import com.jn.commons.utils.JnValidateSession;
+import com.vis.commons.json.validations.VisJsonValidationResume;
 
 
 @EnableWebMvc
@@ -70,6 +73,16 @@ public class ApplicationStarterVisSyncSpring {
 		filtro.addUrlPatterns("/resume/*", "/position/*");
 		return filtro;
 	}
+	
+	@Bean
+	public FilterRegistrationBean<CcpValidJsonFilter> validateResumeJsonFilter() {
+		FilterRegistrationBean<CcpValidJsonFilter> filtro = new FilterRegistrationBean<>();
+		CcpValidJsonFilter filter = new CcpValidJsonFilter(VisJsonValidationResume.class, CcpHttpMethods.PATCH, CcpHttpMethods.POST);
+		filtro.setFilter(filter);
+		filtro.addUrlPatterns("/resume/*");
+		return filtro;
+	}
+
 
 	@Bean
 	public FilterRegistrationBean<CcpPutSessionValuesAndExecuteTaskFilter> putSessionValuesFilter() {
@@ -87,6 +100,7 @@ public class ApplicationStarterVisSyncSpring {
 		filtro.addUrlPatterns("/resume/*", "/position/*");
 		return filtro;
 	}
+
 
 
 }
