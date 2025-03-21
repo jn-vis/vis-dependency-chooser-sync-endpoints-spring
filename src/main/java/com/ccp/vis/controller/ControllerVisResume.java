@@ -24,7 +24,10 @@ import com.vis.commons.utils.VisCommonsUtils;
 public class ControllerVisResume{
 	
 	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PATCH}, path = "/language/{language}")
-	public Map<String, Object> save(@RequestBody Map<String, Object> sessionValues) {
+	public Map<String, Object> save(
+			@PathVariable("language") String language,
+			@PathVariable("email") String email,
+			@RequestBody Map<String, Object> sessionValues) {
 
 		Map<String, Object> result = new JnSyncMensageriaSender(VisAsyncBusiness.resume).apply(sessionValues);
 

@@ -83,7 +83,7 @@ public class ApplicationStarterVisSyncSpring {
 		return filtro;
 	}
 
-
+	
 	@Bean
 	public FilterRegistrationBean<CcpPutSessionValuesAndExecuteTaskFilter> putSessionValuesFilter() {
 		FilterRegistrationBean<CcpPutSessionValuesAndExecuteTaskFilter> filtro = new FilterRegistrationBean<>();
@@ -100,7 +100,7 @@ public class ApplicationStarterVisSyncSpring {
 		filtro.addUrlPatterns("/resume/*", "/position/*");
 		return filtro;
 	}
-
-
+/*
+*/
 
 }
