@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ccp.decorators.CcpJsonRepresentation;
-import com.ccp.jn.sync.mensageria.JnSyncMensageriaSender;
 import com.jn.commons.utils.JnDeleteKeysFromCache;
+import com.jn.sync.mensageria.JnSyncMensageriaSender;
 import com.vis.commons.entities.VisEntityResume;
 import com.vis.commons.utils.VisAsyncBusiness;
 import com.vis.commons.utils.VisCommonsUtils;

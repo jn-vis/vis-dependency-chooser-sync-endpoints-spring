@@ -22,7 +22,7 @@ import com.ccp.implementations.main.authentication.gcp.oauth.CcpGcpMainAuthentic
 import com.ccp.implementations.mensageria.sender.gcp.pubsub.CcpGcpPubSubMensageriaSender;
 import com.ccp.implementations.password.mindrot.CcpMindrotPasswordHandler;
 import com.ccp.implementations.text.extractor.apache.tika.CcpApacheTikaTextExtractor;
-import com.ccp.jn.sync.mensageria.JnSyncMensageriaSender;
+import com.ccp.jn.sync.service.JnValidateSession;
 import com.ccp.local.testings.implementations.CcpLocalInstances;
 import com.ccp.local.testings.implementations.cache.CcpLocalCacheInstances;
 import com.ccp.vis.async.business.factory.CcpVisAsyncBusinessFactory;
@@ -32,7 +32,7 @@ import com.ccp.web.servlet.filters.CcpValidEmailFilter;
 import com.ccp.web.servlet.filters.CcpValidJsonFilter;
 import com.ccp.web.spring.exceptions.handler.CcpSyncExceptionHandler;
 import com.jn.commons.utils.JnAsyncBusiness;
-import com.jn.commons.utils.JnValidateSession;
+import com.jn.sync.mensageria.JnSyncMensageriaSender;
 import com.vis.commons.json.validations.VisJsonValidationResume;
 
 
