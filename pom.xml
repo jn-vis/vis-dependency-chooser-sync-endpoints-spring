@@ -86,7 +86,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ccp.jn.vis</groupId>
-			<artifactId>vis-business-sync</artifactId>
+			<artifactId>vis-business-commons</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
@@ -112,7 +112,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ccp.jn.vis</groupId>
-			<artifactId>vis-business-async</artifactId>
+			<artifactId>vis-business-commons</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

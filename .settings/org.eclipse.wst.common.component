@@ -1,130 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-            
+                
+    
     
     <wb-module deploy-name="jn-dependency-chooser-sync-spring">
-                        
+                                
+        
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
-                        
+                                
+        
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-                        
+                                
+        
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-                
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-                
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
-                
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
                         
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+                        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+                        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+                                
+        
         
         <dependent-module archiveName="ccp-db-crud-elasticsearch-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ccp-db-crud-elasticsearch/ccp-db-crud-elasticsearch">
-                                    
+                                                
+            
             
             <dependency-type>uses</dependency-type>
-                                
+                                            
+        
         
         </dependent-module>
-                        
+                                
+        
         
         <dependent-module archiveName="ccp-db-utils-elasticsearch-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ccp-db-utils-elasticsearch/ccp-db-utils-elasticsearch">
-                                    
+                                                
+            
             
             <dependency-type>uses</dependency-type>
-                                
+                                            
+        
         
         </dependent-module>
-                        
+                                
+        
         
         <dependent-module archiveName="ccp-mensageria-sender-gcp-pubsub-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ccp-mensageria-sender-gcp-pubsub/ccp-mensageria-sender-gcp-pubsub">
-                                    
+                                                
+            
             
             <dependency-type>uses</dependency-type>
-                                
+                                            
+        
         
         </dependent-module>
-                        
+                                
+        
         
         <dependent-module archiveName="ccp-password-mindrot-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ccp-password-mindrot/ccp-password-mindrot">
-                                    
+                                                
+            
             
             <dependency-type>uses</dependency-type>
-                                
+                                            
+        
         
         </dependent-module>
-                        
+                                
+        
         
         <dependent-module archiveName="ccp-file-bucket-gcp-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ccp-file-bucket-gcp/ccp-file-bucket-gcp">
-                                    
+                                                
+            
             
             <dependency-type>uses</dependency-type>
-                                
+                                            
+        
         
         </dependent-module>
-                        
+                                
+        
         
         <dependent-module archiveName="ccp-cache-gcp-memcache-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ccp-cache-gcp-memcache/ccp-cache-gcp-memcache">
-                                    
+                                                
+            
             
             <dependency-type>uses</dependency-type>
-                                
+                                            
+        
         
         </dependent-module>
-                        
+                                
+        
         
         <dependent-module archiveName="ccp-http-apache-mime-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ccp-http-apache-mime/ccp-http-apache-mime">
-                                    
+                                                
+            
             
             <dependency-type>uses</dependency-type>
-                                
+                                            
+        
         
         </dependent-module>
-                        
-        
-        <dependent-module archiveName="vis-business-sync-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/vis-business-sync/vis-business-sync">
-                                    
-            
-            <dependency-type>uses</dependency-type>
                                 
         
-        </dependent-module>
-                        
         
         <dependent-module archiveName="vis-business-commons-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/vis-business-commons/vis-business-commons">
-                                    
+                                                
+            
             
             <dependency-type>uses</dependency-type>
-                                
+                                            
+        
         
         </dependent-module>
-                        
+                                
+        
         
         <dependent-module archiveName="ccp-main-authentication-gcp-oauth-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ccp-main-authentication-gcp-oauth/ccp-main-authentication-gcp-oauth">
-                                    
+                                                
+            
             
             <dependency-type>uses</dependency-type>
-                                
+                                            
+        
         
         </dependent-module>
-                        
+                                
+        
         
         <dependent-module archiveName="ccp-json-gson-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ccp-json-gson/ccp-json-gson">
-                                    
+                                                
+            
             
             <dependency-type>uses</dependency-type>
-                                
+                                            
+        
         
         </dependent-module>
-                        
+                                
+        
         
         <property name="context-root" value="jn-dependency-chooser-sync-spring"/>
-                        
+                                
+        
         
         <property name="java-output-path" value="/vis-dependency-chooser-sync-endpoints-spring/target/classes"/>
-                    
+                            
+    
     
     </wb-module>
-        
+            
+
 
 </project-modules>

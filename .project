@@ -8,7 +8,6 @@
 		<project>ccp-text-extractor-apache-tika</project>
 		<project>ccp-password-mindrot</project>
 		<project>ccp-file-bucket-gcp</project>
-		<project>vis-business-sync</project>
 		<project>ccp-email-sendgrid</project>
 		<project>ccp-main-authentication-gcp-oauth</project>
 		<project>ccp-http-apache-mime</project>

@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ccp.decorators.CcpJsonRepresentation;
+import com.ccp.especifications.db.utils.CcpEntityCrudOperationType;
+import com.ccp.jn.commons.mensageria.JnMensageriaSender;
 import com.jn.commons.utils.JnDeleteKeysFromCache;
-import com.jn.sync.mensageria.JnSyncMensageriaSender;
+import com.vis.commons.business.recruiter.VisAsyncBusinessRecruiterReceivingResumes;
 import com.vis.commons.entities.VisEntityGroupPositionsByRecruiter;
 import com.vis.commons.entities.VisEntityGroupResumesPerceptionsByRecruiter;
-import com.vis.commons.utils.VisAsyncBusiness;
+import com.vis.commons.entities.VisEntityResumePerception;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "recruiter/{email}")
@@ -37,7 +39,7 @@ public class ControllerVisRecruiter {
 				.put("emails", emails)
 				;
 		
-		CcpJsonRepresentation result = new JnSyncMensageriaSender(VisAsyncBusiness.recruiterReceivingResumes).apply(json);
+		CcpJsonRepresentation result = new JnMensageriaSender(VisAsyncBusinessRecruiterReceivingResumes.INSTANCE).apply(json);
 	
 		return result.content;
 	}
@@ -83,7 +85,7 @@ public class ControllerVisRecruiter {
 				.put("resumeId", resumeId)
 				;
 		
-		CcpJsonRepresentation result = new JnSyncMensageriaSender(VisAsyncBusiness.resumeOpinionChange).apply(json);
+		CcpJsonRepresentation result = new JnMensageriaSender(VisEntityResumePerception.ENTITY, CcpEntityCrudOperationType.changeStatus).apply(json);
 	
 		return result.content;
 	}
@@ -96,8 +98,8 @@ public class ControllerVisRecruiter {
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues)
 				.put("resumeId", resumeId)
 				;
-		
-		CcpJsonRepresentation result = new JnSyncMensageriaSender(VisAsyncBusiness.resumeOpinionSave).apply(json);
+		//DOUBT SAVE DA TWIN
+		CcpJsonRepresentation result = new JnMensageriaSender(VisEntityResumePerception.ENTITY, CcpEntityCrudOperationType.save).apply(json);
 	
 		return result.content;
 	}

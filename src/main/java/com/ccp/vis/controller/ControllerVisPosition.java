@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ccp.decorators.CcpJsonRepresentation;
-import com.ccp.jn.vis.sync.service.SyncServiceVisPosition;
+import com.vis.commons.business.position.SyncServiceVisPosition;
 import com.vis.commons.entities.VisEntityGroupResumesByPosition;
 @CrossOrigin
 @RestController

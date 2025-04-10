@@ -22,17 +22,16 @@ import com.ccp.implementations.main.authentication.gcp.oauth.CcpGcpMainAuthentic
 import com.ccp.implementations.mensageria.sender.gcp.pubsub.CcpGcpPubSubMensageriaSender;
 import com.ccp.implementations.password.mindrot.CcpMindrotPasswordHandler;
 import com.ccp.implementations.text.extractor.apache.tika.CcpApacheTikaTextExtractor;
-import com.ccp.jn.sync.service.JnValidateSession;
+import com.ccp.jn.commons.business.JnAsyncBusinessNotifyError;
+import com.ccp.jn.commons.business.JnValidateSession;
+import com.ccp.jn.commons.mensageria.JnMensageriaSender;
 import com.ccp.local.testings.implementations.CcpLocalInstances;
 import com.ccp.local.testings.implementations.cache.CcpLocalCacheInstances;
-import com.ccp.vis.async.business.factory.CcpVisAsyncBusinessFactory;
 import com.ccp.vis.controller.ControllerVisResume;
 import com.ccp.web.servlet.filters.CcpPutSessionValuesAndExecuteTaskFilter;
 import com.ccp.web.servlet.filters.CcpValidEmailFilter;
 import com.ccp.web.servlet.filters.CcpValidJsonFilter;
 import com.ccp.web.spring.exceptions.handler.CcpSyncExceptionHandler;
-import com.jn.commons.utils.JnAsyncBusiness;
-import com.jn.sync.mensageria.JnSyncMensageriaSender;
 import com.vis.commons.json.validations.VisJsonValidationResume;
 
 
@@ -47,12 +46,11 @@ public class ApplicationStarterVisSyncSpring {
 	
 	public static void main(String[] args) {
 		boolean localEnviroment = new CcpStringDecorator("c:\\rh").file().exists();
-		CcpVisAsyncBusinessFactory asyncBusiness = new CcpVisAsyncBusinessFactory();
 		CcpDependencyInjection.loadAllDependencies
 		(
-				localEnviroment ? CcpLocalInstances.mensageriaSender.getLocalImplementation(asyncBusiness) : new CcpGcpPubSubMensageriaSender(),
-				localEnviroment ? CcpLocalCacheInstances.map.getLocalImplementation(asyncBusiness) : new CcpGcpMemCache(),
-				localEnviroment ? CcpLocalInstances.bucket.getLocalImplementation(asyncBusiness) : new CcpGcpFileBucket(),
+				localEnviroment ? CcpLocalInstances.mensageriaSender.getLocalImplementation() : new CcpGcpPubSubMensageriaSender(),
+				localEnviroment ? CcpLocalCacheInstances.map.getLocalImplementation() : new CcpGcpMemCache(),
+				localEnviroment ? CcpLocalInstances.bucket.getLocalImplementation() : new CcpGcpFileBucket(),
 				new CcpApacheTikaTextExtractor(),
 				new CcpElasticSearchDbRequest(),
 				new CcpMindrotPasswordHandler()
@@ -62,7 +60,7 @@ public class ApplicationStarterVisSyncSpring {
 				,new CcpApacheMimeHttp() 
 		);
 
-		CcpSyncExceptionHandler.genericExceptionHandler = new JnSyncMensageriaSender(JnAsyncBusiness.notifyError);
+		CcpSyncExceptionHandler.genericExceptionHandler = new JnMensageriaSender(JnAsyncBusinessNotifyError.INSTANCE);
 		SpringApplication.run(ApplicationStarterVisSyncSpring.class, args);
 	}
 	@Bean
