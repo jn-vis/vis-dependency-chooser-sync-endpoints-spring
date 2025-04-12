@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ccp.decorators.CcpJsonRepresentation;
 import com.ccp.especifications.db.utils.CcpEntityCrudOperationType;
+import com.ccp.jn.commons.mensageria.JnEntityTransferRecordToReverseEntity;
 import com.ccp.jn.commons.mensageria.JnMensageriaSender;
 import com.jn.commons.utils.JnDeleteKeysFromCache;
 import com.vis.commons.entities.VisEntityResume;
@@ -45,7 +46,7 @@ public class ControllerVisResume{
 	@DeleteMapping("/status")
 	public Map<String, Object> changeStatus(@RequestBody Map<String, Object> sessionValues){
 		
-		Map<String, Object> result = new JnMensageriaSender(VisEntityResume.ENTITY, CcpEntityCrudOperationType.changeStatus).apply(sessionValues);
+		Map<String, Object> result = new JnMensageriaSender(VisEntityResume.ENTITY, JnEntityTransferRecordToReverseEntity.class).apply(sessionValues);
 
 		return  result;
 	}
