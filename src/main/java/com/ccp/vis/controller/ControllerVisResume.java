@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ccp.decorators.CcpJsonRepresentation;
 import com.ccp.especifications.db.utils.CcpEntityCrudOperationType;
-import com.ccp.jn.commons.mensageria.JnEntityTransferRecordToReverseEntity;
-import com.ccp.jn.commons.mensageria.JnMensageriaSender;
-import com.jn.commons.utils.JnDeleteKeysFromCache;
+import com.jn.mensageria.JnEntityTransferRecordToReverseEntity;
+import com.jn.mensageria.JnMensageriaSender;
+import com.jn.utils.JnDeleteKeysFromCache;
 import com.vis.commons.entities.VisEntityResume;
 import com.vis.commons.utils.VisCommonsUtils;
 
