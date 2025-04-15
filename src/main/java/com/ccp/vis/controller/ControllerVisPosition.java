@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ccp.decorators.CcpJsonRepresentation;
-import com.vis.commons.business.position.SyncServiceVisPosition;
 import com.vis.commons.entities.VisEntityGroupResumesByPosition;
+import com.vis.commons.services.VisServicePostion;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "recruiters/{email}/positions/{title}")
@@ -24,7 +24,7 @@ public class ControllerVisPosition {
 	@RequestMapping(method = {RequestMethod.POST, RequestMethod.PATCH})
 	public Map<String, Object> save(@RequestBody String sessionValues){
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
-		Map<String, Object> result = SyncServiceVisPosition.INSTANCE.save(json).content;
+		Map<String, Object> result = VisServicePostion.INSTANCE.save(json).content;
 		return result;
 	}
 	
@@ -33,7 +33,7 @@ public class ControllerVisPosition {
 		
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 		
-		Map<String, Object> result = SyncServiceVisPosition.INSTANCE.changeStatus(json).content;
+		Map<String, Object> result = VisServicePostion.INSTANCE.changeStatus(json).content;
 	
 		return result;
 	}
@@ -43,7 +43,7 @@ public class ControllerVisPosition {
 		
 		CcpJsonRepresentation json = new CcpJsonRepresentation(sessionValues);
 		
-		Map<String, Object> result = SyncServiceVisPosition.INSTANCE.getData(json).content;
+		Map<String, Object> result = VisServicePostion.INSTANCE.getData(json).content;
 	
 		return result;
 	}
@@ -61,7 +61,7 @@ public class ControllerVisPosition {
 				.put(VisEntityGroupResumesByPosition.Fields.title.name(), title)
 				;
 		
-		Map<String, Object> result = SyncServiceVisPosition.INSTANCE.getResumeList(json).content;
+		Map<String, Object> result = VisServicePostion.INSTANCE.getResumeList(json).content;
 	
 		return result;
 	}
@@ -80,7 +80,7 @@ public class ControllerVisPosition {
 				.put("title", title)
 				;
 		
-		Map<String, Object> result = SyncServiceVisPosition.INSTANCE.getResumeContent(json).content;
+		Map<String, Object> result = VisServicePostion.INSTANCE.getResumeContent(json).content;
 	
 		return result;
 	}
@@ -95,7 +95,7 @@ public class ControllerVisPosition {
 				.put("title", title)
 				;
 		
-		Map<String, Object> result = SyncServiceVisPosition.INSTANCE.getImportantSkillsFromText(json).content;
+		Map<String, Object> result = VisServicePostion.INSTANCE.getImportantSkillsFromText(json).content;
 	
 		return result;
 	}
@@ -110,7 +110,7 @@ public class ControllerVisPosition {
 				.put("title", title)
 				;
 		
-		Map<String, Object> result = SyncServiceVisPosition.INSTANCE.suggestNewSkills(json).content;
+		Map<String, Object> result = VisServicePostion.INSTANCE.suggestNewSkills(json).content;
 	
 		return result;
 	}

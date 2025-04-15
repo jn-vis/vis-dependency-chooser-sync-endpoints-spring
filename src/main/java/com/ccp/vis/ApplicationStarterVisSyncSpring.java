@@ -29,8 +29,8 @@ import com.ccp.web.servlet.filters.CcpPutSessionValuesAndExecuteTaskFilter;
 import com.ccp.web.servlet.filters.CcpValidEmailFilter;
 import com.ccp.web.servlet.filters.CcpValidJsonFilter;
 import com.ccp.web.spring.exceptions.handler.CcpSyncExceptionHandler;
-import com.jn.business.JnBusinessNotifyError;
-import com.jn.business.JnBusinessValidateSession;
+import com.jn.business.commons.JnBusinessNotifyError;
+import com.jn.business.login.JnBusinessValidateSession;
 import com.jn.mensageria.JnMensageriaSender;
 import com.vis.commons.json.validations.VisJsonValidationResume;
 

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ccp.decorators.CcpJsonRepresentation;
 import com.ccp.especifications.db.utils.CcpEntityCrudOperationType;
-import com.jn.mensageria.JnBulkHandlers;
+import com.ccp.especifications.mensageria.receiver.CcpBulkHandlers;
 import com.jn.mensageria.JnMensageriaSender;
 import com.jn.utils.JnDeleteKeysFromCache;
 import com.vis.commons.business.recruiter.VisAsyncBusinessRecruiterReceivingResumes;
@@ -86,7 +86,7 @@ public class ControllerVisRecruiter {
 				.put("resumeId", resumeId)
 				;
 		
-		CcpJsonRepresentation result = new JnMensageriaSender(VisEntityResumePerception.ENTITY, JnBulkHandlers.transferToReverseEntity).apply(json);
+		CcpJsonRepresentation result = new JnMensageriaSender(VisEntityResumePerception.ENTITY, CcpBulkHandlers.transferToReverseEntity).apply(json);
 	
 		return result.content;
 	}
